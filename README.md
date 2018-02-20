@@ -1,10 +1,10 @@
 ### Generate boot.scr
 
-    mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.source  boot.scr
+    mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.source boot-sd/boot.scr
 
 ### Copy kernel and dtb to tftp
 
-    sudo cp kernel/* /var/iot-lab-rpi/tftp/.
+    sudo cp kernel/* /var/iot-lab-rpi/tftp/rpi3/.
 
 ### Prepare SD card
 
