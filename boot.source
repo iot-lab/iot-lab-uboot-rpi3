@@ -1,0 +1,12 @@
+# dhcp command should not autostart tftp
+setenv autoload no
+dhcp || reset
+tftp ${fdt_addr_r} zImage-bcm2710-rpi-3-b.dtb
+tftp ${kernel_addr_r} zImage || reset
+setenv nfs_root "${serverip}:/iotlab/images/${ipaddr}/image"
+setenv nfs_bootargs "root=/dev/nfs rw nfsroot=${nfs_root},nfsvers=3 nfsrootdebug earlyprintk"
+setenv console_bootargs "8250.nr_uarts=1 console=ttyS0,115200"
+setenv rpi_bootargs "smsc95xx.macaddr=${ethaddr}"
+setenv other_bootargs "ip=dhcp panic=15"
+setenv bootargs "$nfs_bootargs $console_bootargs $rpi_bootargs $other_bootargs"
+bootz ${kernel_addr_r} - ${fdt_addr_r} || reset
