@@ -1,3 +1,10 @@
+This project contains information for building required boot files that have
+to the SD card of a Raspberry Pi3.
+
+The notes explains how to build the `boot.scr` used by u-boot to automatically
+configured and download the kernel from the IoT-LAB infrastructure and how
+to generate and copy the minimal boot image on the SD card.
+
 ### Generate boot.scr
 
     mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.source boot-sd/boot.scr
