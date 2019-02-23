@@ -1,0 +1,36 @@
+/dts-v1/;
+/ {
+    description = "RPI3 Flattened Image Tree";
+    images {
+        iotlab-kernel {
+            description = "RPI3 Kernel built by Yocto";
+            data = /incbin/("./zImage");
+            type = "kernel";
+            arch = "arm";
+            os = "linux";
+            load =  <0x00080000>;
+            entry = <0x00080000>;
+        };
+        bcm2710-fdt {
+            description = "Flattened Device Tree blob for RPI3";
+            data = /incbin/("./zImage-bcm2710-rpi-3-b.dtb");
+            type = "flat_dt";
+            arch = "arm";
+        };
+        spi0-fdto {
+            description = "DT Overlay blob for SPI0";
+            data = /incbin/("./spi0-hw-cs.dtbo");
+            type = "flat_dt";
+            arch = "arm";
+        };
+    };
+
+    configurations {
+        default = "iotlab-rpi3";
+        iotlab-rpi3 {
+            description = "RPI3 Flattened Image with SPI0 enabled";
+            kernel = "iotlab-kernel";
+            fdt = "bcm2710-fdt", "spi0-fdto";
+        };
+    };
+};
