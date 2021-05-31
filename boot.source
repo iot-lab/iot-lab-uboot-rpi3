@@ -7,7 +7,7 @@ fdt resize 32768
 load mmc 0:1 0x2608000 /overlays/spi0-hw-cs.dtbo
 fdt apply 0x2608000
 tftp ${kernel_addr_r} rpi3/zImage || reset
-setenv nfs_bootargs "rootwait rw root=/dev/nfs earlyprintk"
+setenv nfs_bootargs "rootwait rw root=/dev/nfs nfsroot=${serverip}:/iotlab/images/${ipaddr}/image,nfsvers=3 earlyprintk"
 setenv console_bootargs "8250.nr_uarts=1 console=ttyS0,115200"
 setenv rpi_bootargs "smsc95xx.macaddr=${ethaddr}"
 setenv other_bootargs "ip=dhcp panic=15"
