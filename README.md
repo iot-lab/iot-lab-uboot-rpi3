@@ -7,6 +7,7 @@ to generate and copy the minimal boot image on the SD card.
 
 ### Generate boot.scr
 
+    sudo apt install u-boot-tools
     mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.source boot-sd/boot.scr
 
 ### Prepare SD card
@@ -15,7 +16,7 @@ to generate and copy the minimal boot image on the SD card.
     sudo parted -s /dev/mmcblk0 mklabel msdos mkpart primary fat32 1M 30M
     sudo mkfs.vfat /dev/mmcblk0p1
     sudo mount /dev/mmcblk0p1 /mnt
-    sudo cp boot-sd/* /mnt
+    sudo cp -r boot-sd/* /mnt
     sudo umount /mnt
 
 ### Create the image (optional)
